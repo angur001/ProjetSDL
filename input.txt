@@ -1,21 +1,22 @@
 test {
-	int y = 0;
-	int i = y+1;
-
-	const int k = 1;
-	if (i<100) {
-		int a = 10;
+	int i = 1;
+	const int j = 2;
+	< int, int> p = < 3, 4>;
+	int k = fst p;
+	if ( i < 5 ) {
+		int j = 5;
+		j = i * (snd p);
+		i = j + 1;
+		while ( k < 10 ) {
+			int p = 3;
+			k = k + i;
+		}
 	} else {
-		int a = 11;
+		if ( i + j > 10 ) {
+			const boolean p = false;
+			print p;
+		}
+		print p;
 	}
-	
-	int x = i>100 ? 1 : 2;
-	
-	while (i>100) {
-		i = i + 1;
-		int x = 10;
-	}
-	
-	return 0;
-
+	print j;
 }
