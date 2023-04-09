@@ -68,7 +68,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException( "Semantics getType is undefined in Assignment.");
+		return this.value.getType();	
 	}
 
 	/* (non-Javadoc)
@@ -76,7 +76,11 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException( "Semantics checkType is undefined in Assignment.");
+		if ((this.assignable.getType()).equalsTo(this.value.getType())) {
+			return true;			
+		} else {
+			return false;
+		}	
 	}
 	
 	/* (non-Javadoc)
@@ -84,7 +88,7 @@ public class Assignment implements Instruction, Expression {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "Semantics allocateMemory is undefined in Assignment.");
+		return _offset + (this.value.getType()).length();	
 	}
 
 	/* (non-Javadoc)

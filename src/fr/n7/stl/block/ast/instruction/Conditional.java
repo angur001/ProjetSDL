@@ -94,8 +94,10 @@ public class Conditional implements Instruction {
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
 		thenBranch.allocateMemory(_register, _offset);
-		elseBranch.allocateMemory(_register, _offset);
-		return 0;
+		if (elseBranch != null) {
+			elseBranch.allocateMemory(_register, _offset);
+		}
+		return _offset;
 		
 	}
 

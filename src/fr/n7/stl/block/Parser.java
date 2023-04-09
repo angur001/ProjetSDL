@@ -758,17 +758,17 @@ class CUP$Parser$actions {
 					if (bloc.checkType()) {
 						System.out.println("Check Type succeeded");
 						bloc.allocateMemory( Register.SB, 0);
-						Fragment code = bloc.getCode(new TAMFactoryImpl());
-						System.out.println("Generate Code: ");
-						System.out.print(code);
-						File file = new File("_tam");
-						PrintStream printer = null;
-						try {
-							printer = new PrintStream( new FileOutputStream(file));
-							printer.println(code);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						//Fragment code = bloc.getCode(new TAMFactoryImpl());
+						//System.out.println("Generate Code: ");
+						//System.out.print(code);
+						//File file = new File("_tam");
+						//PrintStream printer = null;
+						//try {
+						//	printer = new PrintStream( new FileOutputStream(file));
+						//	printer.println(code);
+						//} catch (IOException e) {
+						//	e.printStackTrace();
+						//}
 					} else {
 						System.out.println("Check Type failed");
 					}
