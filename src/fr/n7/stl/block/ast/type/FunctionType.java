@@ -34,7 +34,7 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException( "equalsTo is undefined in FunctionType.");
+		return false; // TODO : Arthur stp refait cette partie ça me casse les couilles
 	}
 
 	/* (non-Javadoc)

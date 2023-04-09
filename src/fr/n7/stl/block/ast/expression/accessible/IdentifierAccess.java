@@ -55,6 +55,9 @@ public class IdentifierAccess extends AbstractIdentifier implements AccessibleEx
 			if (_declaration instanceof VariableDeclaration) {
 				this.expression = new VariableAccess((VariableDeclaration) _declaration);
 				return true;
+			} else if (_declaration instanceof ConstantDeclaration) {
+				this.expression = new ConstantAccess((ConstantDeclaration) _declaration);
+				return true;
 			}
 		}
 		return false;
