@@ -79,8 +79,9 @@ public class EnumerationType implements Type, Declaration {
 	 */
 	@Override
 	public Type merge(Type _other) {
+	
 		if (_other instanceof EnumerationType) {
-			return new EnumerationType();
+			return AtomicType.NullType; //TODO : Arthur a toi de faire ça fdp
 		} else {
 			return AtomicType.ErrorType;
 		}

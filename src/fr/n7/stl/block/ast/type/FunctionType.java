@@ -34,7 +34,7 @@ public class FunctionType implements Type {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		return false; // TODO : Arthur stp refait cette partie ça me casse les couilles
+		return false; // TODO : Arthur stp refait cette partie ça me casse les couilles fdp
 	}
 
 	/* (non-Javadoc)
