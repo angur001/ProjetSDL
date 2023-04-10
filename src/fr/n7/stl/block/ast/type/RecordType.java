@@ -3,6 +3,7 @@
  */
 package fr.n7.stl.block.ast.type;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -69,7 +70,17 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		if (_other instanceof RecordType) {
+			RecordType _local = (RecordType) _other;
+			boolean ok = true;
+			if (this.fields.size()==_local.fields.size()) {
+				for(int i = 0; i<this.fields.size(); i++) {
+					ok = ok && this.fields.get(i).getType().equalsTo(_local.fields.get(i).getType());
+				}
+				return ok;
+			}
+		}
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -77,7 +88,17 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		if (_other instanceof RecordType) {
+			RecordType _local = (RecordType) _other;
+			boolean ok = true;
+			if (this.fields.size()==_local.fields.size()) {
+				for(int i = 0; i<this.fields.size(); i++) {
+					ok = ok && this.fields.get(i).getType().compatibleWith(_local.fields.get(i).getType());
+				}
+				return ok;
+			}
+		}
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -85,7 +106,23 @@ public class RecordType implements Type, Declaration, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public Type merge(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordType.");
+		if (_other instanceof RecordType) {
+			RecordType _local = (RecordType) _other;
+	        if (this.fields.size() == _local.fields.size()) {
+	        	List<FieldDeclaration> mergedFields = new ArrayList<>();
+	        	for (int i = 0; i < this.fields.size(); i++) {
+	        		String _name;
+	        		if (this.fields.get(i).getType().compatibleWith(_local.fields.get(i).getType())) {
+	        			_name = _local.fields.get(i).getName();
+	        		} else {
+	        			_name = this.fields.get(i).getName();
+	        		}
+	        		mergedFields.add(new FieldDeclaration(_name, this.fields.get(i).getType().merge(_local.fields.get(i).getType())));
+	        	}
+	        	return new RecordType(this.name+_local.name, mergedFields); 	
+	        }
+		}
+		return AtomicType.ErrorType;
 	}
 
 	/* (non-Javadoc)

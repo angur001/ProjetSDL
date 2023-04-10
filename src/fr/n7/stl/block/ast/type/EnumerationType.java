@@ -51,13 +51,7 @@ public class EnumerationType implements Type, Declaration {
 	@Override
 	public boolean equalsTo(Type _other) {
 		if (_other instanceof EnumerationType) {
-			boolean ok = true;
-			if (this.labels.size() == ((EnumerationType) _other).labels.size()) {
-				for(int i = 0; i<this.labels.size(); i++) {
-					ok = ok && (this.labels.get(i).getName().equals(((EnumerationType) _other).labels.get(i).getName()));
-				}
-				return ok;
-			}
+			return this.labels.equals(((EnumerationType) _other).labels);
 		}
 		return false;
 	}
