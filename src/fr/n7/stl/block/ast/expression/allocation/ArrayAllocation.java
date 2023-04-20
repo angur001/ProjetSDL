@@ -66,7 +66,7 @@ public class ArrayAllocation implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		return _factory.createFragment();
+		throw new SemanticsUndefinedException( "getCode is undefined in ArrayAccess.");
 	}
 
 }
