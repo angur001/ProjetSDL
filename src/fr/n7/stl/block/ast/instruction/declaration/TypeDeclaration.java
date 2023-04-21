@@ -49,12 +49,12 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		boolean flag = _scope.accepts(this);
-		if (flag) {
+		if  (_scope.contains(this.name)) return false;
+		boolean ok = _scope.accepts(this);
+		if (ok){
 			_scope.register(this);
-			return true;
-		}
-		return false;
+		} 
+		return ok;
 	}
 
 	/* (non-Javadoc)
@@ -62,7 +62,8 @@ public class TypeDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		return this.type.resolve(_scope);	
+		boolean ok = this.type.resolve(_scope);
+		return ok&&(_scope.knows(this.name));
 	}
 
 	/**

@@ -26,5 +26,7 @@ test {
 	//typedef < Entier, Entier> PaireEntier;
 	//PaireEntier b = < a, 2>;
 
+	struct Point {int x; int y} p;
+	//int z = p.x + p.y;
 	
 }
