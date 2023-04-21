@@ -102,8 +102,8 @@ public class Block {
 	 */	
 	public void allocateMemory(Register _register, int _offset) {
 		int offset = _offset;
-		for( Instruction instr : this.instructions) {
-			offset = instr.allocateMemory(_register, offset);
+		for( Instruction instruction : this.instructions) {
+			offset = instruction.allocateMemory(_register, offset);
 		}
 	}
 
@@ -114,7 +114,11 @@ public class Block {
 	 * @return Synthesized AST for the generated TAM code.
 	 */
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics generateCode is undefined in Block.");
+		Fragment fragment = _factory.createFragment();
+		for( Instruction instruction : this.instructions) {
+			fragment.append(instruction.getCode(_factory));
+			}
+		return fragment;
 	}
 
 }
