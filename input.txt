@@ -22,9 +22,11 @@ test {
 	
 	
 	typedef int Entier;
-	Entier a = 1;
-	//typedef < Entier, Entier> PaireEntier;
-	//PaireEntier b = < a, 2>;
+	//Entier a = 1;
+	typedef < Entier, Entier> PaireEntier;
+	//PaireEntier b = < 1, 2>;
 
+	struct Point {int x; int y} p;
+	//int z = p.x + p.y;
 	
 }

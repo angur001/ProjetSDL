@@ -12,6 +12,7 @@ import fr.n7.stl.block.ast.type.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.util.Logger;
 
 /**
  * Abstract Syntax Tree node for a variable declaration instruction.
@@ -103,12 +104,13 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean collectAndBackwardResolve(HierarchicalScope<Declaration> _scope) {
-		boolean ok = this.value.collectAndBackwardResolve(_scope);
-		boolean flag = _scope.accepts(this);
-		if (flag) {
+		if (_scope.contains(this.name)) return false;
+		boolean ok1 = this.value.collectAndBackwardResolve(_scope);
+		boolean ok2 = _scope.accepts(this);
+		if (ok2){
 			_scope.register(this);
-		}
-		return flag&&ok;
+		} 
+		return ok1 && ok2;
 	}
 
 	/* (non-Javadoc)
@@ -116,7 +118,7 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean fullResolve(HierarchicalScope<Declaration> _scope) {
-		return _scope.knows(this.name);
+		return this.type.resolve(_scope);	
 	}
 
 	/* (non-Javadoc)
@@ -124,9 +126,13 @@ public class VariableDeclaration implements Declaration, Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		if (this.value.getType().compatibleWith(this.type)) {
+		
+		if (this.value.getType().equalsTo(this.type)) {
 			return true;
 		}
+		System.out.println(this.type);
+		System.out.println(this.value.getType());
+		Logger.error("Error: different type");
 		return false;
 	}
 
