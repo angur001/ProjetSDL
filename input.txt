@@ -22,7 +22,7 @@ test {
 	
 	
 	typedef int Entier;
-	Entier a = 1;
+	//Entier a = 1;
 	//typedef < Entier, Entier> PaireEntier;
 	//PaireEntier b = < a, 2>;
 

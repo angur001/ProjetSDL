@@ -117,7 +117,7 @@ public class Block {
 		Fragment fragment = _factory.createFragment();
 		for( Instruction instruction : this.instructions) {
 			fragment.append(instruction.getCode(_factory));
-			}
+		}
 		return fragment;
 	}
 
